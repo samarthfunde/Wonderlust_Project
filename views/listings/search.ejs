@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Listing</title>
+    <style>
+        /* Add CSS for styling the images and listings */
+        .listing-container {
+            display: inline-block;
+            width: 320px; /* Set a fixed width for each listing container */
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-sizing: border-box; /* Include padding and border in the total width */
+            vertical-align: top; /* Align the top edges of the listing containers */
+        }
+        .listing-image {
+            width: 100%; /* Make the image fill the container */
+            height: 200px;
+            object-fit: cover; /* Maintain aspect ratio */
+            border-radius: 10px;
+        }
+        .listing-details {
+            margin-top: 10px;
+            font-size: 14px; /* Set font size for listing details */
+        }
+        .listing-details p {
+            margin: 5px 0; /* Add spacing between details */
+        }
+        .result{
+            text-align: center;
+        }
+        .card-container {
+            display: flex; /* Use flexbox */
+            flex-wrap: wrap; /* Allow items to wrap to the next line */
+            justify-content: center; /* Center items horizontally */
+            gap: 20px; /* Add space between listing containers */
+            padding: 10px; /* Add padding around the container */
+            box-sizing: border-box; /* Include padding in the total width */
+        }
+
+        /* Responsive Styles */
+        @media screen and (max-width: 768px) {
+            .listing-container {
+                width: calc(50% - 20px); /* Adjust width for smaller screens */
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .listing-container {
+                width: calc(100% - 20px); /* Adjust width for even smaller screens */
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1 class="result">Your Listing Results for <%= country %></h1>
+<% if (listings.length > 0) { %>
+    <div class="card-container">
+        <% listings.forEach(listing => { %>
+            <div class="listing-container">
+                <h2><%= listing.title %></h2>
+                <img src="<%= listing.image.url %>" alt="Listing Image" class="listing-image">
+                <div class="listing-details">
+                    <p><strong>Description:</strong> <%= listing.description %></p>
+                    <p><strong>Price:</strong> <%= listing.price %></p>
+                <p><strong>Country:</strong> <%= listing.country %></p>
+                    <p><strong>Location:</strong> <%= listing.location %></p>
+                    <!-- Add additional fields as needed -->
+                </div>
+            </div>
+        <% }); %>
+    </div>
+<% } else { %>
+    <p>No listings found for <%= country %>.</p>
+<% } %>
+
+</body>
+</html>
